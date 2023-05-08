@@ -2,107 +2,72 @@ package com.example.calculatorapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_main.*
-import org.mariuszgromada.math.mxparser.Expression
-import java.text.DecimalFormat
-
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 class MainActivity : AppCompatActivity() {
+    lateinit var tiltitle: TextView
+    lateinit var tilfirst: TextView
+    lateinit var tilsecond: TextView
+    lateinit var tiloutput: TextView
+    lateinit var tilbutton1: Button
+    lateinit var tilbtn2: Button
+    lateinit var tilbtn3: Button
+    lateinit var tilbtn4: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        button_clear.setOnClickListener {
-            input.text = ""
-            output.text = ""
-        }
-        button_bracket_left.setOnClickListener {
-            input.text = addToInputText("(")
-        }
-        button_bracket_right.setOnClickListener {
-            input.text = addToInputText(")")
-        }
-        button_bracket_right.setOnClickListener {
-            input.text = addToInputText(")")
-        }
-        Button_0.setOnClickListener {
-            input.text = addToInputText("0")
-        }
-        Button_1.setOnClickListener {
-            input.text = addToInputText("1")
-        }
-        Button_2.setOnClickListener {
-            input.text = addToInputText("2")
-        }
-        Button_3.setOnClickListener {
-            input.text = addToInputText("3")
-        }
-        Button_4.setOnClickListener {
-            input.text = addToInputText("4")
-        }
-        Button_5.setOnClickListener {
-            input.text = addToInputText("5")
-        }
-        Button_6.setOnClickListener {
-            input.text = addToInputText("6")
-        }
-        Button_7.setOnClickListener {
-            input.text = addToInputText("7")
-        }
-        Button_8.setOnClickListener {
-            input.text = addToInputText("8")
-        }
-        Button_9.setOnClickListener {
-            input.text = addToInputText("9")
-        }
-        Button_dot.setOnClickListener {
-            input.text = addToInputText(".")
-        }
-        Button_division.setOnClickListener {
-            input.text = addToInputText("÷")
-        }
-        Button_multiply.setOnClickListener {
-            input.text = addToInputText("*")
-        }
-        Button_addition.setOnClickListener {
-            input.text = addToInputText("+")
-        }
-        Button_substraction.setOnClickListener {
-            input.text = addToInputText("-")
-        }
-        Button_equals.setOnClickListener {
-            showResults()
+        tilfirst = findViewById(R.id.tilfirst)
+        tilsecond = findViewById(R.id.tilbtn2)
+        tiloutput = findViewById(R.id.tiloutput)
+        sumUpNumbers()
+        minusNumbers()
+        productOfNumbers()
+        divideNumbers()
+    }
+    fun sumUpNumbers() {
+        var first = findViewById<TextView>(R.id.tilfirst)
+        var second = findViewById<TextView>(R.id.tilseconnd)
+        var button = findViewById<Button>(R.id.tilbutton1)
+        button.setOnClickListener {
+            var sumfirst = first.text.toString().toInt()
+            var sumsecond = second.text.toString().toInt()
+            var output = sumfirst + sumsecond
+            Toast.makeText(this, "$output", Toast.LENGTH_SHORT).show()
         }
     }
-
-    private fun addToInputText(buttonValue: String): String {
-        return "${input.text}$buttonValue"
-    }
-    private fun getInputExpression():String{
-        var expression = input.text.replace(Regex("÷"),"/")
-        return expression
-    }
-    private fun showResults(){
-        try {
-            val expression = getInputExpression()
-            val result = Expression(expression).calculate()
-            if(result.isNaN()){
-//                show error message
-                output.text = "Error"
-                output.setTextColor(ContextCompat.getColor(this, R.color.red))
-
-            }
-            else{
-//                show result
-                output.text = DecimalFormat("0.######").format(result).toString()
-                output.setTextColor(ContextCompat.getColor(this, R.color.green))
-            }
-        }catch (e: Exception){
-//            show error message
-            output.text = "Error"
-            output.setTextColor(ContextCompat.getColor(this, R.color.red))
-
+    fun minusNumbers() {
+        var first = findViewById<TextView>(R.id.tilfirst)
+        var second=findViewById<TextView>(R.id.tilseconnd)
+        var button = findViewById<Button>(R.id.tilbtn4)
+        button.setOnClickListener {
+            var sub = first.text.toString().toInt()
+            var sub2 = second.text.toString().toInt()
+            var output = sub - sub2
+            Toast.makeText(this, "$output", Toast.LENGTH_SHORT).show()
         }
-
+    }
+    fun productOfNumbers() {
+        var first = findViewById<TextView>(R.id.tilfirst)
+        var second = findViewById<TextView>(R.id.tilseconnd)
+        var button = findViewById<Button>(R.id.tilbtn2)
+        button.setOnClickListener {
+            var multi = first.text.toString().toInt()
+            var multi2 = second.text.toString().toInt()
+            var output = multi * multi2
+            Toast.makeText(this, "$output", Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun divideNumbers() {
+        var first = findViewById<TextView>(R.id.tilfirst)
+        var second = findViewById<TextView>(R.id.tilseconnd)
+        var button = findViewById<Button>(R.id.tilbtn3)
+        button.setOnClickListener {
+            var divide = first.text.toString().toInt()
+            var divide2 = second.text.toString().toInt()
+            var output = divide % divide2
+            Toast.makeText(this, "$output", Toast.LENGTH_SHORT).show()
+        }
     }
 }
+
