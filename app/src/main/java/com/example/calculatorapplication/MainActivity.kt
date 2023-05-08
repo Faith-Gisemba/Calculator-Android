@@ -20,12 +20,12 @@ class MainActivity : AppCompatActivity() {
         tilfirst = findViewById(R.id.tilfirst)
         tilsecond = findViewById(R.id.tilbtn2)
         tiloutput = findViewById(R.id.tiloutput)
-        sumUpNumbers()
+        addUpNumbers()
         minusNumbers()
         productOfNumbers()
         divideNumbers()
     }
-    fun sumUpNumbers() {
+    fun addUpNumbers() {
         var first = findViewById<TextView>(R.id.tilfirst)
         var second = findViewById<TextView>(R.id.tilseconnd)
         var button = findViewById<Button>(R.id.tilbutton1)
